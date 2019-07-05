@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Excersise2{
+class L2E9{
   public int calculateDifference(int n){
     int sum = 0;
     int sumOfSquares = 0;
@@ -14,7 +14,7 @@ class Excersise2{
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter number");
     int n = sc.nextInt();
-    Excersise2 e = new Excersise2();
+    L2E9 e = new L2E9();
     System.out.println(e.calculateDifference(n));
   }
 }
