@@ -13,10 +13,29 @@ public class ProjectModules {
 	HashMap<Integer,UserData> UserAccountData = new HashMap<Integer,UserData>();
 	
 	public void userAccountCreate(int accountId,String accountPassword) {
-		UserData userInfo = new UserData();
-		userInfo.setAccountPassword(accountPassword);
-		UserAccountData.put(accountId, userInfo);
-		userInfo.setTransaction("Account Created");
+		Set s = UserAccountData.entrySet();
+		Iterator i = s.iterator();
+		boolean flag = true;
+		while(i.hasNext()) {
+			Entry e = (Entry) i.next();
+			if(e.getKey().equals(accountId)) {
+				flag = false;
+				break;
+			}
+			else {
+				flag = true;
+			}
+		}
+		if(flag) {
+			UserData userInfo = new UserData();
+			userInfo.setAccountPassword(accountPassword);
+			UserAccountData.put(accountId, userInfo);
+			System.out.println("Account Created");
+			userInfo.setTransaction("Account Created");
+		}
+		else {
+			System.out.println("Account ID already in use");
+		}
 		
 	}
 	
@@ -111,12 +130,11 @@ public class ProjectModules {
 		boolean flag = true;
 		while(i.hasNext()) {
 			Entry e = (Entry) i.next();
-			if(e.getKey().equals(sourceAccountId)) {
+			Entry e2 = (Entry) i.next();
+			if(e.getKey().equals(sourceAccountId) && e2.getKey().equals(destinationAccountId)) {
 				UserData sourceUserInfo = (UserData)e.getValue();
 				if(sourceUserInfo.getAccountPassword().equals(accountPassword)) {
-					while(i2.hasNext()) {
-						Entry e2 = (Entry) i2.next();
-						if(e2.getKey().equals(destinationAccountId)) {
+						//Entry e2 = (Entry) i2.next();
 							UserData destinationUserInfo = (UserData)e2.getValue();
 							int sourceUserBalance = sourceUserInfo.getBalance();
 							int destinationUserBalance = destinationUserInfo.getBalance();
@@ -130,8 +148,8 @@ public class ProjectModules {
 							destinationUserInfo.setTransaction("User Receive amount "+amount);
 							flag = false;
 							break;
-						}
-					}
+						
+					
 				}
 			}
 		}
@@ -202,3 +220,4 @@ public class ProjectModules {
 	
 
 }
+
