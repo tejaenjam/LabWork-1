@@ -1,0 +1,78 @@
+package com.cap.beans;
+
+import java.io.Serializable;
+
+public class BankBean implements Serializable {
+	private String bname;
+	private String bnum;
+	private String bdob;
+	private String bpass;
+	private int bbal;
+	private long bacc;
+
+	public BankBean(String bname, String bnum, String bdob, String bpass, int bbal, long bacc) {
+		super();
+		this.bname = bname;
+		this.bnum = bnum;
+		this.bdob = bdob;
+		this.bpass = bpass;
+		this.bbal = bbal;
+		this.bacc = bacc;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return " \n account number = " + bacc +"\n mobile number=" + bnum + "\n name=" + bname + "\n Date of Birth  DD:MM:YYYY =" + bdob + "\n password =" + bpass + "\n balance ="
+				+ bbal + "";
+	}
+
+	public String getBname() {
+		return bname;
+	}
+
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+
+	public String getBnum() {
+		return bnum;
+	}
+
+	public void setBnum(String bnum) {
+		this.bnum = bnum;
+	}
+
+	public String getBdob() {
+		return bdob;
+	}
+
+	public void setBdob(String bdob) {
+		this.bdob = bdob;
+	}
+
+	public String getBpass() {
+		return bpass;
+	}
+
+	public void setBpass(String bpass) {
+		this.bpass = bpass;
+	}
+
+	public int getBbal() {
+		return bbal;
+	}
+
+	public void setBbal(int bbal) {
+		this.bbal = bbal;
+	}
+
+	public long getBacc() {
+		return bacc;
+	}
+
+	public void setBacc(long bacc) {
+		this.bacc = bacc;
+	}
+
+}
