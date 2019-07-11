@@ -1,0 +1,88 @@
+package com.cap.beans;
+
+public class TransBean
+{
+	
+	private long transId;
+	private long baccInitial;
+	private long baccFinal;
+	private String transMetd;
+	private int transBal;
+	private String transdate;
+	
+	public TransBean(long transId, long baccInitial, long baccFinal, String transMetd, int transBal, String transdate) 
+	{
+		super();
+		this.transId = transId;
+		this.baccInitial = baccInitial;
+		this.baccFinal = baccFinal;
+		this.transMetd = transMetd;
+		this.transBal = transBal;
+		this.transdate = transdate;
+	}
+
+	
+
+	public  TransBean() {
+		
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Transactions done  :: \n transId = " + transId + "\n  Account Number=" + baccInitial + "\n  Account received = " + baccFinal
+				+ "\n  type of Transaction =  " + transMetd + "\n  Amount used =" + transBal + "\n  Transaction date=" + transdate + "";
+	}
+
+
+
+	public long getTransId() {
+		return transId;
+	}
+
+	public void setTransId(long transId) {
+		this.transId = transId;
+	}
+
+	public long getBaccInitial() {
+		return baccInitial;
+	}
+
+	public void setBaccInitial(long baccInitial) {
+		this.baccInitial = baccInitial;
+	}
+
+	public long getBaccFinal() {
+		return baccFinal;
+	}
+
+	public void setBaccFinal(long baccFinal) {
+		this.baccFinal = baccFinal;
+	}
+
+	public String getTransMetd() {
+		return transMetd;
+	}
+
+	public void setTransMetd(String transMetd) {
+		this.transMetd = transMetd;
+	}
+
+	public int getTransBal() {
+		return transBal;
+	}
+
+	public void setTransBal(int transBal) {
+		this.transBal = transBal;
+	}
+
+	public String getTransdate() {
+		return transdate;
+	}
+
+	public void setTransdate(String transdate) {
+		this.transdate = transdate;
+	}
+	
+}
