@@ -1,0 +1,367 @@
+package com.cap.ui;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+import com.cap.beans.BankBean;
+import com.cap.beans.TransBean;
+import com.cap.service.BankService;
+
+public class BankUI 
+{
+	BankService b=new BankService();
+	long bacc;
+	String bnum1;
+	int i=0;
+	 Scanner sc=new Scanner(System.in);
+	 void stmt()
+	{
+		System.out.println("enter options");
+		System.out.println("1.create");
+		System.out.println("2.balance");
+		System.out.println("3.deposit");
+		System.out.println("4.withdrawl");
+		System.out.println("5.fund Transfer");
+		System.out.println("6.print transacion");
+	}
+	
+	 void choose()
+	 {
+		
+		 while(1!=0)
+		 {
+			 stmt();
+			 int n=sc.nextInt();
+		
+			 switch(n)
+			 {
+			 case 1: 		
+				 			//check name
+				 			System.out.println("enter your name");
+			 				String bname1=sc.next();
+			 				String bname=namecheck(bname1);
+			 				
+			 				//check mobile number
+				 			System.out.println("enter 10 digit  mobile number");
+				 			String bnum2=sc.next();
+				 			 bnum1=numbercheck(bnum2);
+				 			 
+				 			 //check dob
+				 			System.out.println("enter date of birth DD:MM:YYYY");
+				 			String bdob1 =sc.next();
+				 			String bdob=dobcheck(bdob1);
+				 			
+				 			//check passsword
+				 			System.out.println("enter password and must be 8 digits");
+				 			String bpass1=sc.next();
+				 			String bpass=checkpassword(bpass1);
+				 			
+				 			
+				 			System.out.println("minimum balance is  : 100");
+				 			int bbal=100;
+				 			long bnum=Long.parseLong(bnum1);
+				 			bacc=bnum+123456;
+				 			BankBean bean=new BankBean(bname, bnum1, bdob, bpass, bbal,bacc);
+				 			Long accNum=b.createAccount(bean);
+				 			if(accNum>0)
+				 			{
+				 			System.out.println("Account Created with !"+accNum);
+				 			
+				 			}
+				 		  break;
+				 			
+			 case 2:	  System.out.println("enter your account number");
+			 			  long account1=sc.nextLong();
+			 			  
+			 			  while(1!=0) {                                                                   //account validation
+			 			  boolean  val21=b.validation2(account1); 
+			 			  if(val21)
+			 			  {			
+			 				  System.out.println("account number is correct");
+			 				  break;
+			 			  }else
+			 			  {
+			 				  System.out.println("enter valid account number");
+				 			  account1=sc.nextLong(); 
+			 			  }
+			 			  }
+			 			
+			 			  System.out.println("enter password");
+			 			  String password1=sc.next();
+			 			  
+			 			  while(1!=0)                                                                     //password validation
+			 			  {
+			 			  boolean  val1=b.validation(account1,password1); 
+			 			  if(val1)
+			 			  {
+			 				  System.out.println(" password is correct ");
+			 				  break;
+			 				  
+			 			  }	else
+			 			  {
+			 				  System.out.println("type valid  password");
+			 				 password1=sc.next();
+			 			  }
+			 			  }
+			 			  
+			 			  
+			 			 int a1= b.showbalance(account1,password1);
+		 				  System.out.println("Available Balance  : "+a1);
+			 			  break;
+			        
+			 case 3:	 System.out.println("enter your account number");
+			 			 long account2=sc.nextLong();
+			 			 
+			 			 while(1!=0) {                                                                   //account validation
+				 			  boolean  val21=b.validation2(account2); 
+				 			  if(val21)
+				 			  {			
+				 				  System.out.println("account number is correct");
+				 				  break;
+				 			  }else
+				 			  {
+				 				  System.out.println("enter valid account number");
+				 				
+					 			  account2=sc.nextLong(); 
+				 			  }
+				 			  }
+			 			 
+			 			 System.out.println("enter password ");
+			 			 String password2=sc.next();
+			 			 while(1!=0)                                                                    //password validation
+			 			 {
+			 			 boolean  val11=b.validation(account2,password2);
+			 			 if(val11)
+			 			 {
+			 				 System.out.println(" password is correct");
+			 				 break;
+			 				 
+			 			 }	else
+			 			 {
+			 				 System.out.println("enter valid  password");
+			 				password2=sc.next();
+			 			 }
+			 			 }
+			 			 
+			 			 System.out.println("enter deposit amount");
+		 				 int dep1=sc.nextInt();
+		 				 int a11=b.deposit(account2,password2,dep1);
+		 				 System.out.println("balance after deposit");
+		 				 System.out.println(a11);
+			 			 break;
+			 case 4:  	System.out.println("enter your account number");
+			 			long account3=sc.nextLong();
+			 			
+			 			 while(1!=0) {                                                                   //account validation
+				 			  boolean  val21=b.validation2(account3); 
+				 			  if(val21)
+				 			  {			
+				 				  System.out.println("account number is correct");
+				 				  break;
+				 			  }else
+				 			  {
+				 				  System.out.println("enter valid account number");
+				 				 
+					 			  account3=sc.nextLong(); 
+				 			  }
+				 			  }
+			 			
+			 			System.out.println("enter password");
+			 			String password3=sc.next();
+			 			
+			 			while(1!=0)                                                                       //password validation
+			 			{
+			 			boolean  val111=b.validation(account3,password3);
+		                if(val111)
+		                {
+		                	 System.out.println(" password is correct");
+		                	 break;
+		                	 
+				         }	else
+				         {
+				        	 System.out.println("enter valid  password");
+				        	 password3=sc.next();
+				        	 
+				         }
+			 			}
+			 			
+			 			 System.out.println("enter withdrawl amount");
+	                	 int dep3=sc.nextInt();
+	                	 int a111=b.withdrawl(account3,password3,dep3);
+	                	 System.out.println("balance after withdrawl");
+	                	 System.out.println(a111);
+			 			 break;
+			 			
+			 case 5: 	System.out.println("enter account 1 to send funds");
+			 			long account31=sc.nextLong(); 
+			 			 while(1!=0) {                                                                   //account1 validation
+				 			  boolean  val21=b.validation2(account31); 
+				 			  if(val21)
+				 			  {			
+				 				  System.out.println("account number is correct");
+				 				  break;
+				 			  }else
+				 			  {
+				 				  System.out.println("enter valid account number");
+				 				 
+					 			  account31=sc.nextLong(); 
+				 			  }
+				 			  }
+			 			
+			 			System.out.println("enter account 2 to receive funds");
+			 			long account32=sc.nextLong(); 
+			 		
+			 			 while(1!=0) {                                                                   //account2 validation
+				 			  boolean  val21=b.validation2(account32); 
+				 			  if(val21)
+				 			  {			
+				 				  System.out.println("account number is correct");
+				 				  break;
+				 			  }else
+				 			  {
+				 				  System.out.println("enter valid account number");
+				 				 
+					 			  account32=sc.nextLong(); 
+				 			  }
+				 			  }
+			 			
+			 			System.out.println("enter password");
+			 			String password31=sc.next();
+			 			
+			 			while(1!=0)                                                                  //password  validation
+			 			{
+			 				boolean  val111=b.validation(account31,password31);
+			 			
+			 			if(val111)
+			 			{
+			 				
+			 				System.out.println("password is correct");                     
+			 				break;
+			 			}	else
+			 			{
+			 				System.out.println("enter valid  password");
+			 				password31=sc.next();
+			 			}
+			 			}
+			 			
+			 			System.out.println("enter fund amount");
+		 				int k1=sc.nextInt();
+		 				int ba12= b.fund(account31,account32,password31,k1);
+		 				System.out.println("account 1  balance");
+		 				System.out.println(ba12);
+			 			
+			 			break;
+			 case 6:   System.out.println("print  transaction");
+			 		   System.out.println("enter account number");
+			 		   long account33=sc.nextLong();
+			 		   
+			 		  while(1!=0) {                                                                   //account validation
+			 			  boolean  val21=b.validation2(account33); 
+			 			  if(val21)
+			 			  {			
+			 				  System.out.println("account number is correct");
+			 				  break;
+			 			  }else
+			 			  {
+			 				  System.out.println("enter valid account number");
+			 				 
+				 			  account31=sc.nextLong(); 
+			 			  }
+			 			  }
+			 		  		List listui=b.transactionui();
+			 		  		System.out.println(listui);
+			 		  
+			 			//TransBean tbean=new TransBean(transId, baccInitial, baccFinal, transMetd, transBal, transdate);
+			 		  
+			   		   
+			 
+			 }
+		 }
+	 }
+	 
+	 
+	 
+	private String checkpassword(String bpass1) 
+	{
+		// TODO Auto-generated method stub
+		while(1!=0)
+		{
+		if(bpass1.length()<8)
+		{
+			System.out.println("password is invalid and must be 8 digits");
+			bpass1=sc.next();
+			
+			
+		}else
+		{
+			System.out.println("password is correct");
+			return bpass1;
+		}
+		}
+	}
+
+	//check date of birth
+	private String dobcheck(String bdob1)
+	{
+		// TODO Auto-generated method stub
+		while (1!=0)
+		{
+		if(bdob1.length()==8)
+			{
+			System.out.println("dob is correct");
+			return bdob1;
+			}else
+			{
+			System.out.println("enter valid date of birth");
+			bdob1=sc.next();
+			
+			}	
+		}
+	}
+	
+	//check mobile  number
+	 String numbercheck(String bnum2)
+	{
+		// TODO Auto-generated method stub
+		 while(1!=0)
+		 {
+		if((bnum2.length())==10)
+				{
+					System.out.println("number is correct");
+					return bnum2;
+				}else
+				{
+					System.out.println("enter valid mobile number");
+					bnum2=sc.next();
+					
+				}
+		 }
+	}
+	
+	//check name
+	String namecheck(String bname1)
+	{
+		while(true)
+		{
+		if(Pattern.matches("([A-Z])*([a-z])*( )*(.)*", bname1))
+		{
+			System.out.println("name correct");
+			return bname1;
+		} else
+		{
+			System.out.println("enter valid name");
+			bname1=sc.next();	
+		}
+		}
+	}
+
+	
+	public static void main(String[] args) 
+	{
+		System.out.println("WELCOME TO XYZ BANK SERVICE");
+		
+		BankUI a1=new BankUI();
+		a1.choose();
+	}
+}
