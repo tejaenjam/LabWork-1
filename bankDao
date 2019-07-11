@@ -1,0 +1,189 @@
+package com.cap.dao;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import com.cap.beans.BankBean;
+import com.cap.beans.TransBean;
+
+
+public class BankDao implements BankDaoI
+{
+	int i=346278;
+	private HashMap<Long, BankBean> hm;
+	private HashMap<TransBean,Long> hmt;
+	private ArrayList listkey;
+	long bacc;
+	int dep2;
+	int dep4;
+	int q1,q2;
+	
+	
+	
+	public BankDao() {
+		hm=new HashMap<Long, BankBean>();
+		hmt=new HashMap<TransBean,Long>();
+		//listkey =new ArrayList<transBean>(hmt.keySet());
+		}
+
+	
+	 public long createAccount1(BankBean bean)
+	 { 
+		 this.bacc=bean.getBacc();
+	
+		hm.put(bacc, bean);
+		System.out.println(hm.get(bacc));
+		if(hm.containsKey(bacc))
+		{
+			return bacc;
+		}
+		else
+		return 0;
+	 }
+	 
+	
+	 public int showbalace1(long account1,String password1) 
+	 {
+			// TODO Auto-generated method stub
+		BankBean bean1=(BankBean) hm.get(account1);
+		System.out.println("**********"+bean1);
+		System.out.println(bean1.getBpass());
+
+					int sb1=bean1.getBbal();
+					return sb1;
+		}  
+	 
+	 
+	 
+	public int deposit1(long account2, String password2,int dep1)
+	{
+		// TODO Auto-generated method stub
+		
+		BankBean bean2=hm.get(account2);
+		
+			dep2=bean2.getBbal()+dep1;
+			bean2.setBbal(dep2);
+			 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+			    Date date = new Date();  
+			TransBean tb=new TransBean();
+			tb.setBaccInitial(account2);
+			tb.setTransdate(formatter.format(date));
+			tb.setTransBal(dep1);
+			tb.setTransMetd("deposit");
+			tb.setTransId(++i);
+			hmt.put(tb, account2);
+			//listkey =new ArrayList(hmt.keySet());
+			//System.out.println(listkey);
+			return dep2;
+	}
+
+
+	
+
+	public int withdrawl1(long account3, String password3, int dep3)
+	{
+		// TODO Auto-generated method stub
+		i=i++;
+		BankBean bean4=hm.get(account3);
+		
+			 dep4=bean4.getBbal()-dep3;
+			 bean4.setBbal(dep4);
+			 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+			    Date date = new Date();  
+			TransBean tb=new TransBean();
+			tb.setBaccInitial(account3);
+			tb.setTransdate(formatter.format(date));
+			tb.setTransBal(dep3);
+			tb.setTransMetd("withdrawl");
+			tb.setTransId(++i);
+			hmt.put(tb, account3);
+			//listkey =new ArrayList(hmt.keySet());
+			//System.out.println(listkey);
+		
+		return dep4;
+	}
+
+
+	public int fund1(long account31, long account32, String password31, int k1) {
+		// TODO Auto-generated method stub
+		i=i++;
+		BankBean be1=hm.get(account31);
+		BankBean be12=hm.get(account32);
+		
+			q1=be1.getBbal()-k1;
+			q2=be12.getBbal()+k1;
+			be1.setBbal(q1);
+			be12.setBbal(q2);
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+		    Date date = new Date();  
+		TransBean tb=new TransBean();
+		tb.setBaccInitial(account31);
+		tb.setBaccFinal(account32);
+		tb.setTransdate(formatter.format(date));
+		tb.setTransBal(k1);
+		tb.setTransMetd("funds");
+		tb.setTransId(++i);
+		hmt.put(tb, account31);
+		//listkey =new ArrayList(hmt.keySet());
+		//System.out.println(listkey);
+		
+		return q1;
+	}
+
+
+	public boolean validation21(long account1)
+	{
+		// TODO Auto-generated method stub
+		
+		if (hm.containsKey(account1))
+		{
+			return true;
+		}else
+		{
+			return false;
+		}	
+	}
+	
+	
+	public boolean validation(long account1, String password1)
+	{
+		// TODO Auto-generated method stub
+		if (hm.containsKey(account1))
+		{
+			BankBean bean4=hm.get(account1);
+			if(bean4.getBpass().equals(password1))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public List transaction() 
+	{
+		// TODO Auto-generated method stub
+		listkey =new ArrayList(hmt.keySet());
+		return listkey;
+	}
+
+	
+
+/*	public boolean validation1(long account31, String password31, long account32) {
+		// TODO Auto-generated method stub
+		if (hm.containsKey(account31) && hm.containsKey(account32)) 
+		{
+		BankBean be1=hm.get(account31);
+		
+		if((be1.getBpass().equals(password31)))
+		{
+			return true;
+		}
+		}
+		return false;
+	}	*/
+}
