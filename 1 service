@@ -1,0 +1,20 @@
+package com.cg.sevice;
+
+import com.cg.bean.Account;
+import com.cg.dao.MobileDao;
+
+public class MobileService implements MobileServieI{
+MobileDao dao=new MobileDao();
+	public Account getdetails(String mno) {
+		// TODO Auto-generated method stub
+		Account bean=dao.getdetails(mno);
+		
+		return bean;
+	}
+	public double getrecharge(String mno1, double recharge) {
+		// TODO Auto-generated method stub
+		double d=dao.getrecharge(mno1,recharge);
+		return d;
+	}
+
+}
