@@ -1,0 +1,47 @@
+package com.cg.dao;
+
+import java.util.HashMap;
+
+import com.cg.bean.Account;
+
+public class MobileDao implements  MobileDaoI{
+	HashMap<String,Account> hm=new HashMap<String,Account>();
+	public MobileDao()
+	{
+	
+Account s=new Account("Prepaid",995,"Dharma");
+Account s1=new Account("Prepaid",95,"Pavan");
+Account s2=new Account("Prepaid",99,"Aravind");
+hm.put("9967342342", s);
+hm.put("9967356563", s1);
+hm.put("9967564466", s2); 
+
+
+	}
+public Account getdetails(String mno) {
+	// TODO Auto-generated method stub
+	
+	if (hm.containsKey(mno)) {
+		
+		Account bean = (Account) hm.get(mno);
+		System.out.println(bean);
+		return bean;
+	}
+	else
+	{
+	return null;
+	}
+	}
+
+public double getrecharge(String mno1, double recharge) {
+	// TODO Auto-generated method stub
+	Account bean=(Account) hm.get(mno1);
+	double updatedbalance = 0;
+	if(hm.containsKey(mno1))
+	{
+		 updatedbalance=bean.getAccountBalance()+recharge;
+	}
+	return updatedbalance;
+}
+
+}
